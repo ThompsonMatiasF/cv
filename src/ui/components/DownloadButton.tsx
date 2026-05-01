@@ -26,7 +26,7 @@ export const DownloadButton: React.FC<DownloadButtonProps> = ({
 
   return (
     <StyledButton onClick={handleDownload} disabled={isLoading}>
-      {isLoading ? '⬇️ Descargando...' : '⬇️ Descargar PDF'}
+      {isLoading ? '⬇️ Downloading...' : '⬇️ Download PDF'}
     </StyledButton>
   )
 }
