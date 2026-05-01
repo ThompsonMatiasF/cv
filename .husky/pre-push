@@ -1,0 +1,6 @@
+set -e
+
+echo "🧪 Running tests with coverage before push..."
+npm run test:coverage
+
+echo "✅ All tests passed with coverage. Proceeding with push."
