@@ -12,6 +12,8 @@ export const Page = styled.div`
 
 export const Container = styled.div`
   width: 794px;
+  max-width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
   background: ${({ theme }) => theme.colors.card};
   padding: 40px;
@@ -80,6 +82,9 @@ export const Card = styled.div`
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.border};
   color: ${({ theme }) => theme.colors.text};
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 `
 
 export const ItemTitle = styled.div`
@@ -102,6 +107,7 @@ export const List = styled.ul`
   margin-top: 8px;
   padding-left: 18px;
   color: ${({ theme }) => theme.colors.text};
+  max-width: 100%;
 `
 
 export const ListItem = styled.li`
