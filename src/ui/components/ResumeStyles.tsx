@@ -17,6 +17,8 @@ export const PageBackground = styled.div`
 
 export const Container = styled.div`
   width: 794px;
+  max-width: 100%;
+  box-sizing: border-box;
   min-height: 1123px;
   margin: auto;
   background: ${({ theme }) => theme.colors.card};
@@ -43,6 +45,10 @@ export const Hero = styled.section`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 40px;
+
+  > * {
+    min-width: 0;
+  }
 
   &[data-variant='pdf'] {
     flex-direction: row;
