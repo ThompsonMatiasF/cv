@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const StyledButton = styled.button`
-  border: 1px solid ${({ theme }) => theme.border};
-  background: ${({ theme }) => theme.card};
-  color: ${({ theme }) => theme.text};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background: ${({ theme }) => theme.colors.card};
+  color: ${({ theme }) => theme.colors.text};
   padding: 6px 12px;
   border-radius: 20px;
   cursor: pointer;
