@@ -1,207 +1,129 @@
-import { FC } from 'react'
-import { ThemeToggle } from '@ui/components/ThemeToggle'
-import { DownloadButton } from '@ui/components/DownloadButton'
+import { FC, useEffect } from 'react'
 import {
-  Wrapper,
+  Avatar,
+  Contact,
+  ContactLink,
   Container,
-  Sidebar,
-  Content,
-  Header,
-  Name,
-  Role,
-  Subtitle,
-  SidebarSection,
-  SidebarTitle,
-  SidebarList,
-  SidebarItem,
-  Section,
-  Title,
-  SubTitle,
-  Text,
-  Small,
+  Description,
+  Hero,
+  Item,
+  ItemSubtitle,
+  ItemTitle,
   List,
   ListItem,
-  Article,
-  FloatingControls,
-  Avatar,
-  StyledLink,
+  PageBackground,
+  Section,
+  SectionTitle,
+  Skill,
+  SkillsGrid,
+  Subtitle,
+  Title,
 } from '@ui/components/ResumeStyles'
+import { appData } from '../config/appData'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
 
-export const Resume: FC = () => {
+type Props = {
+  onRender?: () => void
+  variant?: 'screen' | 'pdf'
+}
+
+export const Resume: FC<Props> = ({ onRender, variant = 'screen' }) => {
+  const { hero, experience, projects, skills } = appData.resume
+
+  useEffect(() => {
+    onRender?.()
+  }, [onRender])
+
   return (
-    <Wrapper>
-      <FloatingControls>
-        <DownloadButton
-          elementId="resume-container"
-          fileName="Matias-Thompson-CV.pdf"
-        />
-        <ThemeToggle />
-      </FloatingControls>
+    <PageBackground data-variant={variant}>
+      <Container data-variant={variant}>
+        <Hero data-variant={variant}>
+          <div>
+            <Title>{hero.name}</Title>
+            <Subtitle>{hero.title}</Subtitle>
+            <Description>{hero.description}</Description>
 
-      <Container id="resume-container">
-        <Sidebar>
-          <Header>
-            <Avatar src="/matias-thompson.jpeg" alt="Matías Thompson" />
-            <Name>Matías Federico Thompson</Name>
-            <Role>Senior Frontend Engineer</Role>
-            <Subtitle>React · Arquitectura Escalable</Subtitle>
-          </Header>
+            <Contact>
+              <ContactLink href={`mailto:${hero.contact.email}`}>
+                <FontAwesomeIcon icon={faEnvelope} />
+                {hero.contact.email}
+              </ContactLink>
 
-          <SidebarSection>
-            <SidebarTitle>Contacto</SidebarTitle>
-            <SidebarList>
-              <SidebarItem>📍 Buenos Aires, Argentina</SidebarItem>
-              <SidebarItem>
-                📞{' '}
-                <StyledLink
-                  href="tel:+541133030041"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  +54 11 3303-0041
-                </StyledLink>
-              </SidebarItem>
-              <SidebarItem>
-                ✉️{' '}
-                <StyledLink
-                  href="mailto:thompson.matiasf@gmail.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  thompson.matiasf@gmail.com
-                </StyledLink>
-              </SidebarItem>
-              <SidebarItem>
-                🔗{' '}
-                <StyledLink
-                  href="https://linkedin.com/in/matias-federico-thompson-147a6858"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  linkedin.com/in/matias-federico-thompson-147a6858
-                </StyledLink>
-              </SidebarItem>
-            </SidebarList>
-          </SidebarSection>
+              <ContactLink
+                href={`https://wa.me/${hero.contact.phone.replace(/\D/g, '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faPhone} />
+                {hero.contact.phone}
+              </ContactLink>
 
-          <SidebarSection>
-            <SidebarTitle>Stack</SidebarTitle>
-            <SidebarList>
-              <SidebarItem>
-                <strong>Frontend:</strong> React, Angular, HTML, CSS
-              </SidebarItem>
-              <SidebarItem>
-                <strong>Lenguajes:</strong> JavaScript, TypeScript
-              </SidebarItem>
-              <SidebarItem>
-                <strong>Testing:</strong> Vitest, React Testing Library
-              </SidebarItem>
-              <SidebarItem>
-                <strong>APIs:</strong> REST, GraphQL
-              </SidebarItem>
-              <SidebarItem>
-                <strong>Herramientas:</strong> Git, Docker, Linux
-              </SidebarItem>
-              <SidebarItem>
-                <strong>Diseño:</strong> Figma
-              </SidebarItem>
-            </SidebarList>
-          </SidebarSection>
+              <ContactLink
+                href={hero.contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faLinkedin} />
+                LinkedIn
+              </ContactLink>
 
-          <SidebarSection>
-            <SidebarTitle>Idiomas</SidebarTitle>
-            <SidebarList>
-              <SidebarItem>Español — Nativo</SidebarItem>
-              <SidebarItem>Inglés — Básico</SidebarItem>
-            </SidebarList>
-          </SidebarSection>
-        </Sidebar>
+              <ContactLink
+                href={hero.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faGithub} />
+                GitHub
+              </ContactLink>
+            </Contact>
+          </div>
 
-        <Content>
-          <Section>
-            <Title>Perfil</Title>
-            <Text>
-              Frontend Engineer con más de 10 años de experiencia en IT,
-              especializado en desarrollo de aplicaciones web con React y
-              TypeScript.
-            </Text>
-            <Text>
-              Fuerte enfoque en arquitectura frontend, aplicando principios como
-              SOLID y Clean Architecture para construir soluciones mantenibles,
-              desacopladas y testeables.
-            </Text>
-            <Text>
-              Experiencia trabajando en equipos Agile, colaborando con diseño y
-              producto para transformar prototipos en soluciones funcionales de
-              calidad.
-            </Text>
-          </Section>
+          <Avatar src={hero.avatar} alt={hero.name} />
+        </Hero>
 
-          <Section>
-            <Title>Especialización</Title>
-            <List>
-              <ListItem>
-                Arquitectura frontend desacoplada (UI / Controllers / dominio)
-              </ListItem>
-              <ListItem>Aplicación de principios SOLID</ListItem>
-              <ListItem>Context API + inyección de dependencias</ListItem>
-              <ListItem>Código mantenible y testeable</ListItem>
-              <ListItem>Implementación de diseños desde Figma</ListItem>
-            </List>
-          </Section>
+        <Section>
+          <SectionTitle>Experiencia</SectionTitle>
 
-          <Section>
-            <Title>Experiencia</Title>
-
-            <Article>
-              <SubTitle>Veritran — Frontend Engineer</SubTitle>
-              <Small>2021 – Actualidad</Small>
+          {experience.map((exp, index) => (
+            <Item key={index}>
+              <ItemTitle>{exp.title}</ItemTitle>
+              {exp.subtitle && <ItemSubtitle>{exp.subtitle}</ItemSubtitle>}
               <List>
-                <ListItem>Desarrollo de aplicaciones React escalables</ListItem>
-                <ListItem>Mejora de arquitectura y mantenibilidad</ListItem>
-                <ListItem>Trabajo en equipos Agile</ListItem>
+                {exp.items.map((item, i) => (
+                  <ListItem key={i}>{item}</ListItem>
+                ))}
               </List>
-            </Article>
+            </Item>
+          ))}
+        </Section>
 
-            <Article>
-              <SubTitle>iúnigo — Frontend Engineer</SubTitle>
-              <Small>2020 – 2021</Small>
+        <Section>
+          <SectionTitle>Proyectos</SectionTitle>
+
+          {projects.map((project, index) => (
+            <Item key={index}>
+              <ItemTitle>{project.title}</ItemTitle>
               <List>
-                <ListItem>Desarrollo de interfaces con React</ListItem>
-                <ListItem>Integración con APIs y mejoras UI</ListItem>
+                {project.items.map((item, i) => (
+                  <ListItem key={i}>{item}</ListItem>
+                ))}
               </List>
-            </Article>
+            </Item>
+          ))}
+        </Section>
 
-            <Article>
-              <SubTitle>Despegar — Software Engineer</SubTitle>
-              <Small>2016 – 2020</Small>
-              <List>
-                <ListItem>Desarrollo de SPAs y herramientas internas</ListItem>
-                <ListItem>Optimización de performance</ListItem>
-              </List>
-            </Article>
+        <Section>
+          <SectionTitle>Skills</SectionTitle>
 
-            <Article>
-              <SubTitle>Carrefour Argentina — Junior Analyst</SubTitle>
-              <Small>2012 – 2016</Small>
-              <List>
-                <ListItem>Desarrollo de reportes internos</ListItem>
-                <ListItem>Visualización de datos</ListItem>
-              </List>
-            </Article>
-          </Section>
-
-          <Section>
-            <Title>Educación</Title>
-            <List>
-              <ListItem>Da Vinci — Desarrollador Web (2015 – 2017)</ListItem>
-              <ListItem>
-                Escuela Técnica Raggio — Técnico Electromecánico
-              </ListItem>
-            </List>
-          </Section>
-        </Content>
+          <SkillsGrid>
+            {skills.map((skill) => (
+              <Skill key={skill}>{skill}</Skill>
+            ))}
+          </SkillsGrid>
+        </Section>
       </Container>
-    </Wrapper>
+    </PageBackground>
   )
 }

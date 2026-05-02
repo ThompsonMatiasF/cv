@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
-import { downloadResumeAsPdf } from '@ui/actions/downloadPdf'
-import { StyledButton } from './StyledButton'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDownload, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { useTheme } from '@ui/hooks/useTheme'
+import { ThemeButton } from './ThemeButton'
+import { downloadResumeAsPdf } from '@ui/actions/downloadResumeAsPdf'
 
 interface DownloadButtonProps {
-  elementId: string
   fileName?: string
 }
 
 export const DownloadButton: React.FC<DownloadButtonProps> = ({
-  elementId,
   fileName = 'resume.pdf',
 }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
 
   const handleDownload = async () => {
     setIsLoading(true)
     try {
-      await downloadResumeAsPdf(elementId, fileName)
+      await downloadResumeAsPdf(fileName)
     } catch (error) {
       console.error('Error downloading PDF:', error)
     } finally {
@@ -25,8 +28,12 @@ export const DownloadButton: React.FC<DownloadButtonProps> = ({
   }
 
   return (
-    <StyledButton onClick={handleDownload} disabled={isLoading}>
-      {isLoading ? '⬇️ Downloading...' : '⬇️ Download PDF'}
-    </StyledButton>
+    <ThemeButton onClick={handleDownload} title="Download PDF">
+      <FontAwesomeIcon
+        icon={isLoading ? faSpinner : faDownload}
+        spin={isLoading}
+        color={isLight ? '#666' : '#aaa'}
+      />
+    </ThemeButton>
   )
 }
