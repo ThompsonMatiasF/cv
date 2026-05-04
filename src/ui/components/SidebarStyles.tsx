@@ -23,7 +23,7 @@ export const Nav = styled.nav`
     top: 0;
     transform: none;
     width: 100%;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 16px;
@@ -39,6 +39,12 @@ export const Divider = styled.div`
   height: 1px;
   background: ${({ theme }) => theme.colors.border};
   margin: 6px 0;
+
+  @media (max-width: ${({ theme }) => theme.layout.breakpoints.tablet}) {
+    height: 40px;
+    width: 1px;
+    margin: 0 6px;
+  }
 `
 
 export const IconButton = styled.button<{ $isActive?: boolean }>`

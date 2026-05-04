@@ -21,11 +21,11 @@ const NavItem: FC<{ route: RouteConfig }> = ({ route }) => {
 
 export const Sidebar: FC = () => (
   <Nav>
-    <ThemeToggle />
-    <DownloadButton fileName="Matias-Thompson-CV.pdf" />
-    <Divider />
     {routes.map((route) => (
       <NavItem key={route.path} route={route} />
     ))}
+    <Divider />
+    <DownloadButton fileName="Matias-Thompson-CV.pdf" />
+    <ThemeToggle />
   </Nav>
 )
