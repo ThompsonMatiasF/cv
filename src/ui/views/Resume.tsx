@@ -61,23 +61,27 @@ export const Resume: FC<Props> = ({ onRender, variant = 'screen' }) => {
                 {hero.contact.phone}
               </ContactLink>
 
-              <ContactLink
-                href={hero.contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FontAwesomeIcon icon={faLinkedin} />
-                LinkedIn
-              </ContactLink>
+              {variant !== 'pdf' && (
+                <>
+                  <ContactLink
+                    href={hero.contact.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FontAwesomeIcon icon={faLinkedin} />
+                    LinkedIn
+                  </ContactLink>
 
-              <ContactLink
-                href={hero.contact.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FontAwesomeIcon icon={faGithub} />
-                GitHub
-              </ContactLink>
+                  <ContactLink
+                    href={hero.contact.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FontAwesomeIcon icon={faGithub} />
+                    GitHub
+                  </ContactLink>
+                </>
+              )}
             </Contact>
           </div>
 
