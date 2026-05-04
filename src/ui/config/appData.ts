@@ -32,6 +32,7 @@ export type ResumeData = {
     }
   }
   experience: ResumeItem[]
+  previousExperience: string[]
   projects: ResumeItem[]
   skills: string[]
 }
@@ -53,7 +54,7 @@ export const appData: AppData = {
         email: 'thompson.matiasf@gmail.com',
         phone: '+54 9 11 3303-0041',
         linkedin:
-          'https://www.linkedin.com/in/matias-federico-thompson-147a6858/?skipRedirect=true',
+          'https://www.linkedin.com/in/matias-federico-thompson/?skipRedirect=true',
         github: 'https://github.com/ThompsonMatiasF?tab=repositories',
       },
     },
@@ -84,6 +85,12 @@ export const appData: AppData = {
           'Code reviews y mejora continua',
         ],
       },
+    ],
+
+    previousExperience: [
+      'Backend: desarrollo de APIs con Node.js y Express',
+      'Mobile: aplicaciones con React Native',
+      'Frontend adicional: experiencia con Angular en SPAs',
     ],
 
     projects: [

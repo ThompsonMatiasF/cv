@@ -30,7 +30,8 @@ type Props = {
 }
 
 export const Resume: FC<Props> = ({ onRender, variant = 'screen' }) => {
-  const { hero, experience, projects, skills } = appData.resume
+  const { hero, experience, previousExperience, projects, skills } =
+    appData.resume
 
   useEffect(() => {
     onRender?.()
@@ -60,23 +61,27 @@ export const Resume: FC<Props> = ({ onRender, variant = 'screen' }) => {
                 {hero.contact.phone}
               </ContactLink>
 
-              <ContactLink
-                href={hero.contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FontAwesomeIcon icon={faLinkedin} />
-                LinkedIn
-              </ContactLink>
+              {variant !== 'pdf' && (
+                <>
+                  <ContactLink
+                    href={hero.contact.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FontAwesomeIcon icon={faLinkedin} />
+                    LinkedIn
+                  </ContactLink>
 
-              <ContactLink
-                href={hero.contact.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FontAwesomeIcon icon={faGithub} />
-                GitHub
-              </ContactLink>
+                  <ContactLink
+                    href={hero.contact.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FontAwesomeIcon icon={faGithub} />
+                    GitHub
+                  </ContactLink>
+                </>
+              )}
             </Contact>
           </div>
 
@@ -97,6 +102,16 @@ export const Resume: FC<Props> = ({ onRender, variant = 'screen' }) => {
               </List>
             </Item>
           ))}
+        </Section>
+
+        <Section>
+          <SectionTitle>Experiencias previas</SectionTitle>
+
+          <List>
+            {previousExperience.map((item, index) => (
+              <ListItem key={index}>{item}</ListItem>
+            ))}
+          </List>
         </Section>
 
         <Section>

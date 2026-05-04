@@ -19,17 +19,13 @@ const NavItem: FC<{ route: RouteConfig }> = ({ route }) => {
   )
 }
 
-export const Sidebar: FC = () => {
-  const isResumeView = useMatch({ path: '/', end: true })
-
-  return (
-    <Nav>
-      <ThemeToggle />
-      {isResumeView && <DownloadButton fileName="Matias-Thompson-CV.pdf" />}
-      <Divider />
-      {routes.map((route) => (
-        <NavItem key={route.path} route={route} />
-      ))}
-    </Nav>
-  )
-}
+export const Sidebar: FC = () => (
+  <Nav>
+    {routes.map((route) => (
+      <NavItem key={route.path} route={route} />
+    ))}
+    <Divider />
+    <DownloadButton fileName="Matias-Thompson-CV.pdf" />
+    <ThemeToggle />
+  </Nav>
+)

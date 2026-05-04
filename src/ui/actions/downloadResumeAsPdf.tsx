@@ -51,14 +51,12 @@ export const downloadResumeAsPdf = async (
   const pageHeight = 297
   const imgHeight = (canvas.height * pdfWidth) / canvas.width
 
-  let heightLeft = imgHeight
-  let position = 0
+  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight)
 
-  pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight)
-  heightLeft -= pageHeight
+  let heightLeft = imgHeight - pageHeight
 
-  while (heightLeft > 0) {
-    position = heightLeft - imgHeight
+  while (heightLeft >= 0) {
+    const position = heightLeft - imgHeight
     pdf.addPage()
     pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight)
     heightLeft -= pageHeight
