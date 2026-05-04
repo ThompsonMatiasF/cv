@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { ReactNode } from 'react'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import { downloadResumeAsPdf } from './downloadResumeAsPdf'
@@ -23,8 +24,10 @@ vi.mock('jspdf', () => {
   }
 })
 
-const renderMock = vi.fn((node: any) => {
-  const resume = node?.props?.children?.props?.children
+const renderMock = vi.fn((node: ReactNode) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const anyNode = node as any
+  const resume = anyNode?.props?.children?.props?.children
   if (resume?.props?.onRender) {
     resume.props.onRender()
   }
@@ -100,5 +103,6 @@ describe('downloadResumeAsPdf', () => {
     await downloadResumeAsPdf()
 
     expect(addPageMock).toHaveBeenCalled()
+    expect(addImageMock.mock.calls.length).toBeGreaterThanOrEqual(2)
   })
 })
