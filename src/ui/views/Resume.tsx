@@ -30,7 +30,8 @@ type Props = {
 }
 
 export const Resume: FC<Props> = ({ onRender, variant = 'screen' }) => {
-  const { hero, experience, projects, skills } = appData.resume
+  const { hero, experience, previousExperience, projects, skills } =
+    appData.resume
 
   useEffect(() => {
     onRender?.()
@@ -97,6 +98,16 @@ export const Resume: FC<Props> = ({ onRender, variant = 'screen' }) => {
               </List>
             </Item>
           ))}
+        </Section>
+
+        <Section>
+          <SectionTitle>Experiencias previas</SectionTitle>
+
+          <List>
+            {previousExperience.map((item, index) => (
+              <ListItem key={index}>{item}</ListItem>
+            ))}
+          </List>
         </Section>
 
         <Section>

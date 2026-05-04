@@ -32,6 +32,7 @@ export type ResumeData = {
     }
   }
   experience: ResumeItem[]
+  previousExperience: string[]
   projects: ResumeItem[]
   skills: string[]
 }
@@ -84,6 +85,12 @@ export const appData: AppData = {
           'Code reviews y mejora continua',
         ],
       },
+    ],
+
+    previousExperience: [
+      'Backend: desarrollo de APIs con Node.js y Express',
+      'Mobile: aplicaciones con React Native',
+      'Frontend adicional: experiencia con Angular en SPAs',
     ],
 
     projects: [
